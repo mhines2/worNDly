@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in user!{% endblock %}
+
+{% block content %}
+
+<br>
+<head>
+<style>
+  /* CSS styles */
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .button {
+    background-color: white;
+    color: black;
+    border: 2px solid #04AA6D;
+    padding: 20px;
+    transition-duration: 0.4s;
+    display: block;
+    margin: 0 auto;
+  }
+  .button:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
+  input {
+    font-size: 20px;
+    border: 2px solid pink;
+    border-radius: 4px;
+    padding: 20px;
+  }
+  .center {
+    text-align: center;
+  }
+</style>
+</head>
+
+<div class="center">
+    <!-- Sign in form -->
+    <h2><u>Sign In to Account</u></h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p></p>
+        <!-- Username input -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <p></p>
+        <!-- Password input -->
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <p></p>
+        <!-- Submit button -->
+        <button class="btn btn-outline-dark" type="submit">Sign in</button>
+    </form>
+    
+    <p></p>
+    <!-- Back button -->
+    <a href="{% url 'homepage' %}" class="button">Back to Home</a>
+
+    <p></p>
+    {% for message in messages %}
+      <div>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+  .flag-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Added space from the top */
+  }
+
+  .flag-button {
+    border: none;
+    padding: 0;
+    margin: 0 20px; /* Added space between buttons */
+    background: none;
+    cursor: pointer;
+  }
+
+  .flag-icon {
+    width: 150px; /* Larger size */
+    height: 100px;
+    transition-duration: 0.4s;
+  }
+
+  .flag-icon:hover {
+    transform: scale(1.1); /* Add hover effect */
+  }
+</style>
+<h2 style="text-align: center; margin-bottom: 20px;">{{ new_name }} Select a Language:</h2>
+
+<div class="flag-container">
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="button" class="flag-button" name="german">
+      <a href="{% url 'gameplay:start_game_GERMAN' %}">
+        <img class="flag-icon" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/640px-Flag_of_Germany.svg.png" alt="German Flag">
+      </a>
+    </button>
+
+    <button type="button" class="flag-button" name="english">
+      <a href="{% url 'gameplay:start_game_ENGLISH' %}">
+        <img class="flag-icon" src="https://i.ebayimg.com/images/g/0~gAAMXQ9qpRTk04/s-l1200.jpg" alt="English Flag">
+      </a>
+    </button>
+
+    <button type="button" class="flag-button" name="spanish">
+      <a href="{% url 'gameplay:start_game_SPANISH' %}">
+        <img class="flag-icon" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png" alt="Spanish Flag">
+      </a>
+    </button>
+
+    <button type="button" class="flag-button" name="french">
+      <a href="{% url 'gameplay:start_game_FRENCH' %}">
+        <img class="flag-icon" src="https://cdn.britannica.com/82/682-004-F0B47FCB/Flag-France.jpg" alt="French Flag">
+      </a>
+    </button>
+
+    <button type="button" class="flag-button" name="portuguese">
+      <a href="{% url 'gameplay:start_game_PORT' %}">
+        <img class="flag-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Portugal.svg/800px-Flag_of_Portugal.svg.png" alt="Portuguese Flag">
+      </a>
+    </button>
+
+  </form>
+</div>
+
+{% endblock %}

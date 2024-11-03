@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<style>
+    .btn-enter-guess {
+        margin-top: 20px; /* Adjust margin */
+        font-size: 24px;
+        line-height: 1.5;
+        border-radius: 10px; /* Adjust border radius */
+        background-color: #4CAF50; /* Change background color */
+        color: white; /* Change text color */
+        border: none;
+        padding: 10px 20px; /* Adjust padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .input-group-prepend {
+        text-align: center;
+    }
+
+    .input-group {
+        width: 60%; /* Adjust width */
+        margin: 0 auto; /* Center horizontally */
+        margin-top: 20px; /* Adjust margin */
+    }
+
+    /* Adjust input box size and add border */
+    .form-control {
+        font-size: 18px;
+        width: 70%;
+        padding: 10px; /* Adjust padding */
+        border: 2px solid #ccc; /* Add border */
+        border-radius: 10px; /* Adjust border radius */
+    }
+
+    .badges-container {
+        display: flex; /* Use flexbox layout */
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .badge, .yellowbadge, .greenbadge {
+        margin-top: 10px;
+        width: 100px; 
+        height: 100px; 
+        background-color: #293d7a; 
+        color: #dbd5d5; 
+        text-align: center; 
+        line-height: 100px; 
+        font-size: 24px;
+    }
+
+    .yellowbadge {
+        background-color: rgb(165, 165, 9); 
+        color: #000000; 
+    }
+
+    .greenbadge {
+        background-color: rgb(9, 68, 9); 
+        color: #ffffff; 
+    }
+
+    /* Adjust margin between badges */
+    .badges-container > * {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+</style>
+
+<h1 style="text-align: center;">Guess a word in {{ language_selected }}!</h1>
+
+<p style="text-align: center;">Word of the day: {{ word_of_day }}</p>
+
+<div style="text-align: center;">
+    <div>
+        <p>Guesses left: {{ guesses_left }}</p>
+        <p>Games allowed to play today: {{ max_plays }}</p>
+        <p>You've played: {{ numGamesPlayedThusFar }}</p>
+        <!-- <p>Good letters: {{ yellow_letters }}</p> -->
+        <!-- <p>Bad letters: {{ gray_letters }}</p> -->
+        <!-- <p>Correct letters: {{ green_letters }}</p> -->
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Should be a FIVE letter word." aria-label="" aria-describedby="basic-addon1" id="curr_guess" name="curr_guess"> <!-- Adjust font size and width -->
+        </div>
+        <button class="btn btn-enter-guess" type="submit">Enter your guess!</button>
+        {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+    </form>
+</div>
+
+
+
+<div class="badges-container">
+    {% for letter in allguesses.0.0 %}
+        {% if letter in allguesses.0.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.0.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="badges-container">
+    {% for letter in allguesses.1.0 %}
+        {% if letter in allguesses.1.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.1.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="badges-container">
+    {% for letter in allguesses.2.0 %}
+        {% if letter in allguesses.2.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.2.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="badges-container">
+    {% for letter in allguesses.3.0 %}
+        {% if letter in allguesses.3.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.3.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="badges-container">
+    {% for letter in allguesses.4.0 %}
+        {% if letter in allguesses.4.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.4.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="badges-container">
+    {% for letter in allguesses.5.0 %}
+        {% if letter in allguesses.5.1 %}
+            <div class="greenbadge">{{ letter }}</div>
+        {% elif letter in allguesses.5.2 %}
+            <div class="yellowbadge">{{ letter }}</div>
+        {% else %}
+            <div class="badge">{{ letter }}</div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+{% endblock %}

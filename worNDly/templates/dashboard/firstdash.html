@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}WorNDly by manor-quad!{% endblock %}
+{% block content %}
+
+<style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .left-column, .right-column {
+        width: 49%; /* Adjust as needed */
+    }
+
+    .info-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 600px;
+        margin: auto; /* Center the chart horizontally */
+    }
+</style>
+<div class="info-box">
+    <h1>{{ user.username }}'s Statistics:</h1>
+    <p style="font-size:20px">Total Games Played: {{tot}}</p>
+    <p style="font-size:20px">Win Percentage: {{perc}}</p>
+</div>
+<div class="container">
+    <div class="left-column">
+        <body>
+            <div class="chart-container" >
+                <canvas id="distributionChart"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                let guessStatsData = {{ guess_stats|safe }} // Directly use guess_stats as an array
+                let ctx = document.getElementById('distributionChart').getContext('2d');
+                let distributionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1', '2', '3', '4', '5', '6'],
+                        datasets: [{
+                            label: 'Guess Distribution',
+                            data: guessStatsData, // Set data directly to guess_stats array
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Guess Distribution'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 10,
+                                top: 10,
+                                bottom: 10
+                            }
+                        },
+                    }
+                });
+            </script>
+        </body>
+    </div>
+    
+    <div class="right-column">
+        <h2 style = "text-align: center">View Previous Plays</h2>
+        <!-- Dropdown menu for selecting data view -->
+        <form method="get">
+            <label for="data-view">Select Data View:</label>
+            <select id="data-view" name="data-view">
+                <option value="all">All</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="year">This Year</option>
+            </select>
+            <button type="submit">Show</button>
+        </form>
+        
+        <!-- Display selected data view -->
+        {% if selected_data_view == 'all' %}
+            <p>All past plays</p>
+            {% for l in listOfPlays %}
+                <div>{{ l }}</div>
+            {% endfor %}
+        {% elif selected_data_view == 'year' %}
+            <p>This year's plays</p>
+            {% for l in listOfPlaysYEAR %}
+                <div>{{ l }}</div>
+            {% endfor %}
+        {% elif selected_data_view == 'month' %}
+            <p>This month's plays</p>
+            {% for l in listOfPlaysMONTH %}
+                <div>{{ l }}</div>
+            {% endfor %}
+        {% elif selected_data_view == 'week' %}
+            <p>This week's plays</p>
+            {% for l in listOfPlaysWEEK %}
+                <div>{{ l }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

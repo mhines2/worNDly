@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Create user!{% endblock %}
+
+<h2>Create a new WorNDly user!</h2>
+
+{% block content %}
+
+<br>
+<head>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .button {
+    background-color: white;
+    color: black;
+    border: 2px solid #04AA6D;
+    padding: 20px;
+    transition-duration: 0.4s;
+    display: block;
+    margin: 0 auto;
+  }
+  .button:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
+  input {
+    font-size: 20px;
+    border: 2px solid pink;
+    border-radius: 4px;
+    padding: 20px;
+  }
+  .center {
+    text-align: center;
+  }
+</style>
+</head>
+
+<div class="center">
+    <!-- Form to create new user profile -->
+    <h2><u>Create Profile</u></h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p></p>
+        <!-- Username input -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <p></p>
+        <!-- Email input -->
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <p></p>
+        <!-- Password input -->
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <p></p>
+        <!-- Submit button -->
+        <button class="btn btn-outline-dark" type="submit">Submit Profile</button>
+    </form>
+    
+    <p></p>
+    <!-- Back button -->
+    <a href="{% url 'homepage' %}" class="button">Back to Home</a>
+
+    <p></p>
+    {% for message in messages %}
+      <div>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}WorNDly! by manor-quad{% endblock %}</title>
+  <div style="text-align: center;">
+    <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">
+      <img src='https://i.postimg.cc/5t8dN86w/Screenshot-2024-04-29-at-11-01-50-PM.png' alt="worNDly_logo" style="width: 100%;">
+    </a>
+  </div>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+  
+<style>
+  /* CSS styles */
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #C1EFBD;
+  }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    text-align: center;
+  }
+  .navbar a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    display: inline-block;
+  }
+  .navbar a:hover {
+    background-color: #DDA0DD;
+    color: black;
+  }
+  .navbar a:active {
+    background-color: #DB7093;
+    color: white;
+  }
+  .navbar a[enabled]{
+    color: rgb(13, 145, 17); /* Optional: Change the color to indicate it's disabled */
+  } 
+  .navbar a[disabled]{
+    pointer-events: none;
+    color: grey; /* Optional: Change the color to indicate it's disabled */
+  } 
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10px;
+    border: 5px solid #F47324;
+    border-radius: 5px;
+  }
+  div.scroll-container {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+  }
+  div.scroll-container img {
+    padding: 10px;
+  }
+  .column {
+    float: lfeft;
+    width: 50%;
+  }
+</style>
+</head>
+
+<body>
+  <div class="navbar">
+    {% if not user.is_authenticated %}
+      <a href="{% url 'homepage' %}">Home</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+      <a href="{% url 'gameplay:desired_lang' %}">Play</a> 
+      <a href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
+      <a href="{% url 'store:purchase_games' %}">Store</a>
+      <a href="{% url 'homepage' %}">Sign Out, {{ user.username }}</a>
+    {% endif %}
+  </div>
+    
+  <div id="content">
+    {% block content %}
+    
+    {% endblock %}
+  </div>
+
+</body>
+</html>

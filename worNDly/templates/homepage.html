@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+<br>
+ <style>
+  .row {
+    font-size: 22px;
+  }
+  .logout a {
+      background-color: white;
+      color: black;
+      border: 2px solid rgb(231, 32, 14);
+      padding: 20px;
+      transition-duration: 0.4s;
+
+      width: 30%;
+    }
+    .scroll-container {
+        display: flex;
+
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      background-color: white;
+      color: black;
+      border: 2px solid rgb(7, 75, 54);
+      border-radius: 4px;
+      padding: 20px;
+      transition-duration: 0.4s;
+      display: inline-block;
+      margin: 10px auto;
+    }
+    button:hover {
+      background-color: rgb(22, 198, 143);
+      color: white;
+    }
+
+</style>
+
+{% if user.is_authenticated %}
+<h2 style="text-align: center; margin-bottom: 20px;">{{ user.username }}, welcome to WorNDly!</h2>
+<div class="center">
+    <button><a href="{% url 'logout' %}" style="text-decoration: none; color: inherit;">Sign Out</a></button>
+</div>
+
+{% else %}
+<h2 style="text-align: center; margin-bottom: 20px;">Welcome to WorNDly!</h2>
+
+<div class="center">
+    <button><a href="{% url 'create' %}" style="text-decoration: none; color: inherit;">Create a New Profile</a></button>
+    <p></p>
+    <button><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Sign In</a></button>
+</div>
+
+<!-- Picture -->
+<div class="center">
+    <img src="https://miro.medium.com/v2/resize:fit:1200/1*LpxLQj3xgPwMaUjaM3NW7g.jpeg" alt="Shrek says hi" style="width: 50%; margin-top: 20px;">
+</div>
+    
+{% endif %}
+
+{% endblock %}
