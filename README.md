@@ -1,4 +1,4 @@
-# manor_quad
+# worNDly
 Programming Paradigms Spring 2024 Course Project (Group 10):
 * Emily Colleran
 * Michael Hines
